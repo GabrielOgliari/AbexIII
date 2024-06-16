@@ -9,6 +9,7 @@ import studentIdService from '../../core/services/sign-up/student-id-service.ts'
 import { ValidStudentIdResponse } from '../../core/services/sign-up/types/valid-student-id.ts';
 import { dispatchToast } from '../../helpers/dispatch-toast.ts';
 import * as Styles from './styles.ts';
+import {ScreenLabelComponent} from "./ScreenLabelComponent.tsx";
 
 export const StudentIdScreen = () => {
   const { navigate } = useNavigation();
@@ -67,7 +68,7 @@ export const StudentIdScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-around' }}
       >
-        <Styles.ScreenLabel>Informações adicionais</Styles.ScreenLabel>
+        <ScreenLabelComponent previousScreen={'email-and-password'} label={"Informações adicionais"}/>
 
         <FetchDataButton
           onPress={handleImagePicker}

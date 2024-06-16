@@ -6,12 +6,15 @@ import { LoadingCar } from '../../components/LoadingCar/index.tsx';
 import { useForm } from '../../hooks/useForm.ts';
 import { isEmpty } from '../../utils/validators/isEmpty.ts';
 import { isValidCpf } from '../../utils/validators/isValidCpf.ts';
+import { Masks } from 'react-native-mask-input';
 import * as Styles from './styles.ts';
+import {ScreenLabelComponent} from "./ScreenLabelComponent.tsx";
 
 type PersonalDetailsForm = {
   name: string;
   cpf: string;
   birthDate: Date;
+  cellPhone: string
 };
 
 export const PersonalDetailsScreen = () => {
@@ -31,6 +34,10 @@ export const PersonalDetailsScreen = () => {
         if (isEmpty(value))
           return 'Por favor, insira a sua Data de Nascimento.';
       },
+      cellPhone: value => {
+        if(isEmpty(value))
+          return 'Por favor, insira seu número de telefone.'
+      }
     },
   });
 
@@ -46,24 +53,33 @@ export const PersonalDetailsScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-around' }}
       >
-        <Styles.ScreenLabel>
-          Informe seus dados{'\n'}pessoais
-        </Styles.ScreenLabel>
+        <ScreenLabelComponent previousScreen={'student-id'} label={'Informe seus dados pessoais'}/>
 
         <Styles.InputsView>
-          <Input {...register('name')} placeholder="Nome Completo" />
+          <Input {...register('name')} placeholder="Nome Completo" label={"Nome Completo"}/>
 
           <Input
             {...register('cpf')}
-            placeholder="CPF"
+            placeholder="000.000.000.00"
+            label={"CPF"}
             keyboardType="numeric"
+            mask={Masks.BRL_CPF}
           />
 
           {/* Deve ser campo Data */}
           <Input
             {...register('birthDate')}
-            placeholder="Data de Nascimento"
+            placeholder="01/02/2003"
             keyboardType="numeric"
+            label={"Data de Nascimento"}
+            mask={Masks.DATE_DDMMYYYY}
+          />
+          <Input
+            {...register('cellPhone')}
+            placeholder="(12) 34567-8910"
+            keyboardType="numeric"
+            label={"Número de celular"}
+            mask={Masks.BRL_PHONE}
           />
         </Styles.InputsView>
 

@@ -9,6 +9,7 @@ import { useForm } from '../../hooks/useForm.ts';
 import { isEmpty } from '../../utils/validators/isEmpty.ts';
 import { isValidPlate } from '../../utils/validators/isValidPlate.ts';
 import * as Styles from './styles.ts';
+import {ScreenLabelComponent} from "./ScreenLabelComponent.tsx";
 
 export type VehicleForm = {
   plate: string;
@@ -75,25 +76,24 @@ export const VehicleScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-around' }}
       >
-        <Styles.ScreenLabel>
-          Informe os dados{'\n'}do veículo
-        </Styles.ScreenLabel>
+        <ScreenLabelComponent previousScreen={'address'} label={"Informe os dados do veículo"}/>
 
         <Styles.InputsView>
-          <Input placeholder="Placa" {...register('plate')} />
+          <Input label={"Placa"} placeholder="Placa" {...register('plate')} />
 
-          <Input placeholder="Cor" {...register('color')} />
+          <Input label={"Cor"} placeholder="Cor" {...register('color')} />
 
           <Input
+            label={"Ano Fabricação"}
             placeholder="Ano Fabricação"
             {...register('manufacturingYear')}
           />
 
-          <Input placeholder="Ano Modelo" {...register('modelYear')} />
+          <Input  label={"Ano Modelo"} placeholder="Ano Modelo" {...register('modelYear')} />
 
-          <Input placeholder="Cidade" {...register('city')} />
+          <Input label={'Cidade'} placeholder="Cidade" {...register('city')} />
 
-          <Input placeholder="Estado" {...register('state')} />
+          <Input label={'Estado'} placeholder="Estado" {...register('state')} />
         </Styles.InputsView>
 
         <LoadingCar iniciaLeft={0} finalLeft={230} />

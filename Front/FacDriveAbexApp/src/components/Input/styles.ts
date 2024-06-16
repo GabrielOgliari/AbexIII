@@ -1,8 +1,10 @@
-import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
 import { height, width } from '../../utils/functions.ts';
+import MaskInput from 'react-native-mask-input';
 
-export const WrapperInput = styled.View``;
+export const WrapperInput = styled.View`
+    margin-bottom: 10px;
+`;
 
 export const CustomInputContainer = styled.TouchableOpacity<{
   isFocused: boolean;
@@ -15,11 +17,11 @@ export const CustomInputContainer = styled.TouchableOpacity<{
   border-radius: 22px;
   border: ${props => (props.isFocused ? '2px #24C2F9' : '1px #000')};
   flex-direction: row;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 4px;
+  margin-top: 4px;
 `;
 
-export const Input = styled.TextInput`
+export const Input = styled(MaskInput)`
   flex: 1;
   padding-left: 8%;
   padding-right: 8%;
@@ -34,14 +36,10 @@ export const ShowPassword = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const OverPlaceholder = styled(Animated.Text)`
+export const InputLabel = styled.Text`
   padding-left: 6px;
   padding-right: 6px;
   color: #000;
-  position: absolute;
-  top: -${height * 0.014}px;
-  left: ${width * 0.06}px;
-  background-color: white;
   font-size: ${height * 0.018}px;
 `;
 

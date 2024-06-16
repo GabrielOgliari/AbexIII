@@ -9,6 +9,7 @@ import { dispatchToast } from '../../helpers/dispatch-toast.ts';
 import { useForm } from '../../hooks/useForm.ts';
 import { isEmpty } from '../../utils/validators/isEmpty.ts';
 import * as Styles from './styles.ts';
+import {ScreenLabelComponent} from "./ScreenLabelComponent.tsx";
 
 type EmailAndPasswordForm = {
   email: string;
@@ -73,16 +74,15 @@ export const EmailAndPasswordScreen = () => {
     <Styles.SignUpContainer>
       <Styles.ScrollViewContainer
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-around' }}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-around', alignItems: "center"}}
       >
-        <Styles.ScreenLabel>
-          Vamos começar o{'\n'}seu cadastro
-        </Styles.ScreenLabel>
+        <ScreenLabelComponent previousScreen={'presentation'} label={'Vamos começar o seu cadastro'}/>
 
         <Styles.InputsView>
-          <Input placeholder="Email Institucional" {...register('email')} />
-          <Input placeholder="Senha" {...register('password')} isPassword />
+          <Input placeholder="Email Institucional" {...register('email')} label={"Email Institucional"}/>
+          <Input placeholder="Senha" {...register('password')} isPassword label={"Senha"}/>
           <Input
+            label={"Confirmar Senha"}
             placeholder="Confirmar Senha"
             readOnly={!watch('password')}
             {...register('passwordConfirmation')}

@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Feather';
 import { height } from '../../utils/functions.ts';
 import * as Styles from './styles.ts';
@@ -20,6 +15,8 @@ type InputProps = {
   error?: string | undefined;
   inputType?: 'text' | 'number' | 'date';
   readOnly?: boolean;
+  mask?: (string | RegExp)[];
+  label: string
 };
 
 export const Input = ({
@@ -34,24 +31,11 @@ export const Input = ({
   error,
   inputType = 'text',
   readOnly,
+  mask,
+  label
 }: InputProps) => {
   const [isFocus, setIsFocus] = useState(false);
   const [showPassword, setShowPassword] = useState(isPassword);
-  const placeHolderOpacity = useSharedValue(0);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: placeHolderOpacity.value,
-  }));
-
-  useEffect(() => {
-    if (!blocked) {
-      if (value !== undefined && placeHolderOpacity.value === 0) {
-        placeHolderOpacity.value = withTiming(1, { duration: 200 });
-      } else if (value === undefined) {
-        placeHolderOpacity.value = withTiming(0, { duration: 100 });
-      }
-    }
-  }, [value, blocked]);
 
   const handleTextChange = (text: string) => {
     switch (inputType) {
@@ -74,14 +58,14 @@ export const Input = ({
 
   return (
     <Styles.WrapperInput>
+      <Styles.InputLabel>
+        {hasSubmitted ? `* ${label}` : label}
+      </Styles.InputLabel>
       <Styles.CustomInputContainer
         isFocused={isFocus}
         halfInput={halfInput}
         blocked={blocked}
       >
-        <Styles.OverPlaceholder style={animatedStyle}>
-          {placeholder}
-        </Styles.OverPlaceholder>
         <Styles.Input
           keyboardType={getKeyboardType(inputType, keyboardType)}
           readOnly={readOnly}
@@ -94,6 +78,7 @@ export const Input = ({
           onChangeText={handleTextChange}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
+          mask={mask}
         />
         {isPassword && (
           <Styles.ShowPassword onPress={() => setShowPassword(!showPassword)}>

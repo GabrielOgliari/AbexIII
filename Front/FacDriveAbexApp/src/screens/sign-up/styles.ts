@@ -30,3 +30,14 @@ export const ScrollViewContainer = styled.ScrollView`
 export const HalfInputView = styled.View`
   width: ${width * 0.9}px;
 `;
+
+export const ScreenLabelContainer = styled.View`
+  flex-direction: row;
+`;
+
+export const BackButton = styled.TouchableOpacity`
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+`;

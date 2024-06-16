@@ -9,7 +9,9 @@ import addressService from '../../core/services/sign-up/address-service.ts';
 import { AddressResponse } from '../../core/services/sign-up/types/address.ts';
 import { useForm } from '../../hooks/useForm.ts';
 import { isEmpty } from '../../utils/validators/isEmpty.ts';
+import  { Masks } from 'react-native-mask-input';
 import * as Styles from './styles.ts';
+import {ScreenLabelComponent} from "./ScreenLabelComponent.tsx";
 
 type AddressForm = {
   zipCode: string;
@@ -80,14 +82,14 @@ export const AddressScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-around' }}
       >
-        <Styles.ScreenLabel>
-          Prosseguindo com o{'\n'}cadastro
-        </Styles.ScreenLabel>
+        <ScreenLabelComponent previousScreen={'personal-details'} label={'Prosseguindo com o cadastro'}/>
 
         <Styles.InputsView>
           <Input
             {...register('zipCode')}
-            placeholder="CEP ex: 12345-678"
+            placeholder="12345-678"
+            label={"CEP"}
+            mask={Masks.ZIP_CODE}
             keyboardType="numeric"
           />
 
@@ -97,12 +99,14 @@ export const AddressScreen = () => {
             >
               <Input
                 {...register('state')}
+                label={"Estado"}
                 placeholder="Estado"
                 blocked={true}
                 halfInput={true}
               />
               <Input
                 {...register('city')}
+                label={"Cidade"}
                 placeholder="Cidade"
                 blocked={true}
                 halfInput={true}
@@ -116,21 +120,22 @@ export const AddressScreen = () => {
                 {...register('neighborhood')}
                 placeholder="Bairro"
                 halfInput={true}
+                label={"Bairro"}
               />
 
               <Input
                 {...register('number')}
                 placeholder="N° Residência"
                 halfInput={true}
+                label={"N° Residência"}
               />
             </View>
           </Styles.HalfInputView>
 
-          <Input {...register('street')} placeholder="Bairro" />
-
           <Input
             {...register('complement')}
-            placeholder="Complemento (opcional)"
+            placeholder="Complemento"
+            label={"Complemento (opcional)"}
           />
         </Styles.InputsView>
 

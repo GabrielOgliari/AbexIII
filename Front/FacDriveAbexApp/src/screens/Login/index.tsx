@@ -42,9 +42,9 @@ export const LoginScreen = () => {
       <Styles.Title>Login</Styles.Title>
 
       <Styles.WrapperFields>
-        <Input placeholder="Email" {...register('email')} />
+        <Input placeholder="Email" {...register('email')} label={"Email"}/>
 
-        <Input placeholder="Senha" {...register('password')} />
+        <Input placeholder="Senha" {...register('password')} label={"Senha"}/>
 
         <Button
           label="Entrar"
