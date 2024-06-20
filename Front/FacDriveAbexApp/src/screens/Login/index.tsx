@@ -42,9 +42,9 @@ export const Login = () => {
   return (
     <Container title="Login">
       <View style={{ gap: width * 0.08 }}>
-        <Fields.Input placeholder="Email" {...register('email')} />
+        <Fields.Input label="Email" {...register('email')} />
 
-        <Fields.Input placeholder="Senha" {...register('password')} />
+        <Fields.Input label="Senha" {...register('password')} />
       </View>
 
       <View style={{ gap: width * 0.08, marginBottom: width * 0.08 }}>

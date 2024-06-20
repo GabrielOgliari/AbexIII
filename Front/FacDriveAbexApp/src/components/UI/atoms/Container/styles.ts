@@ -20,3 +20,21 @@ export const Title = styled.Text`
   width: ${width * 0.9};
   word-break: break-all;
 `;
+
+// export const ScreenLabelContainer = styled.View`
+//   flex-direction: row;
+// `;
+
+// export const BackButton = styled.TouchableOpacity`
+//   height: 40px;
+//   width: 40px;
+//   align-items: center;
+//   justify-content: center;
+// `;
+
+// export const ScreenLabel = styled.Text`
+//   font-size: 36px;
+//   font-weight: bold;
+//   color: black;
+//   width: ${width * 0.9}px;
+// `;

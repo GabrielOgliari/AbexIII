@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View } from 'react-native';
+import { Masks } from 'react-native-mask-input';
 import { useQuery } from 'react-query';
 import { Button } from '../../components/UI/atoms/Button';
 import { Container } from '../../components/UI/atoms/Container';
@@ -13,6 +14,7 @@ import signUpService from '../../services/sign-up/sign-up-service';
 import { AddressResponse } from '../../services/sign-up/types/address';
 import { width } from '../../utils/dimensions';
 import { isEmpty } from '../../utils/validators/isEmpty';
+import { isValidZipCode } from '../../utils/validators/isValidZipCode';
 import { ProgressCar } from './components/ProgressCar';
 import { UserTypeEnum } from './enums/user-type-enum';
 
@@ -26,7 +28,7 @@ export type AddressForm = {
   street: string;
 };
 
-const QUANTITY_OF_DIGITS_ZIP_CODE = 8;
+const QUANTITY_OF_DIGITS_ZIP_CODE = 9;
 
 export const Address = () => {
   const { setObject, getObject } = useFormStateContext();
@@ -38,7 +40,7 @@ export const Address = () => {
       validations: {
         zipCode: value => {
           if (isEmpty(value)) return 'Por favor, insira o seu CEP.';
-          // if (!isValidZipCode(value)) return 'Por favor, insira um CEP válido.';
+          if (!isValidZipCode(value)) return 'Por favor, insira um CEP válido.';
         },
         state: value => {
           if (isEmpty(value)) return 'Por favor, insira o seu Estado.';
@@ -90,21 +92,23 @@ export const Address = () => {
 
       <View style={{ gap: width * 0.08 }}>
         <Fields.Input
-          placeholder="CEP ex: 12345-678"
+          label="CEP"
+          placeholder="12345-678"
+          mask={Masks.ZIP_CODE}
           keyboard="numeric"
           {...register('zipCode')}
         />
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <Fields.Input
-            placeholder="Estado"
+            label="Estado"
             size="sm"
             blocked
             {...register('state')}
           />
 
           <Fields.Input
-            placeholder="Cidade"
+            label="Cidade"
             size="sm"
             blocked
             {...register('city')}
@@ -112,17 +116,18 @@ export const Address = () => {
         </View>
 
         <View style={{ gap: width * 0.08 }}>
-          <Fields.Input placeholder="Bairro" {...register('neighborhood')} />
+          <Fields.Input label="Bairro" {...register('neighborhood')} />
 
-          <Fields.Input placeholder="Rua" {...register('street')} />
+          <Fields.Input label="Rua" {...register('street')} />
 
-          <Fields.Input placeholder="N° Residência" {...register('number')} />
+          <Fields.Input label="N° Residência" {...register('number')} />
         </View>
 
-        <Fields.Input placeholder="Bairro" {...register('neighborhood')} />
+        <Fields.Input label="Bairro" {...register('neighborhood')} />
 
         <Fields.Input
-          placeholder="Complemento (opcional)"
+          label="Complemento (opcional)"
+          placeholder="Complemento"
           {...register('complement')}
         />
       </View>

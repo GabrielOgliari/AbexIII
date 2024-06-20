@@ -85,19 +85,12 @@ export const AccessData = () => {
       />
 
       <View style={{ gap: width * 0.08 }}>
-        <Fields.Input
-          placeholder="Email Institucional"
-          {...register('email')}
-        />
+        <Fields.Input label="Email Institucional" {...register('email')} />
+
+        <Fields.Input label="Senha" mode="password" {...register('password')} />
 
         <Fields.Input
-          placeholder="Senha"
-          mode="password"
-          {...register('password')}
-        />
-
-        <Fields.Input
-          placeholder="Confirmar Senha"
+          label="Confirmar Senha"
           readOnly={!watch('password')}
           mode="password"
           {...register('passwordConfirmation')}

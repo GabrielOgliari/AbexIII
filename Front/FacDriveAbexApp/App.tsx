@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { FormStateProvider } from './src/context/useFormStateContext.tsx';
-import { Navigator } from './src/navigation/navigation.tsx';
+import { Navigator } from './src/navigation/Navigation.tsx';
 
 const queryClient = new QueryClient();
 

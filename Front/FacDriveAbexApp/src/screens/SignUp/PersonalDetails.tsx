@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View } from 'react-native';
+import { Masks } from 'react-native-mask-input';
 import { useMutation } from 'react-query';
 import { Button } from '../../components/UI/atoms/Button';
 import { Container } from '../../components/UI/atoms/Container';
@@ -37,14 +38,23 @@ export const PersonalDetails = () => {
         name: value => {
           if (isEmpty(value)) return 'Por favor, insira o seu Nome.';
         },
-        cpf: value => {
-          if (isEmpty(value)) return 'Por favor, insira o seu CPF.';
-          if (isValidCpf('132.291.791-18'))
-            return 'Por favor, insira um CPF válido.';
+        surname: value => {
+          if (isEmpty(value)) return 'Por favor, insira o seu Sobrenome.';
         },
         birthDate: value => {
           if (isEmpty(value))
             return 'Por favor, insira a sua Data de Nascimento.';
+        },
+        gender: value => {
+          if (isEmpty(value)) return 'Por favor, insira o seu Gênero.';
+        },
+        cpf: value => {
+          if (isEmpty(value)) return 'Por favor, insira o seu CPF.';
+          if (!isValidCpf(value)) return 'Por favor, insira um CPF válido.';
+        },
+        phone: value => {
+          if (isEmpty(value))
+            return 'Por favor, insira o seu Número de Celular.';
         },
       },
     });
@@ -86,33 +96,39 @@ export const PersonalDetails = () => {
   return (
     <Container title="Dados Pessoais">
       <View style={{ gap: width * 0.08 }}>
-        <Fields.Input {...register('name')} placeholder="Nome" />
+        <Fields.Input {...register('name')} label="Nome" />
 
-        <Fields.Input {...register('surname')} placeholder="Sobrenome" />
+        <Fields.Input {...register('surname')} label="Sobrenome" />
 
         <Fields.Input
           {...register('cpf')}
-          placeholder="CPF"
+          label="CPF"
+          placeholder="000.000.000.00"
           keyboard="numeric"
+          mask={Masks.BRL_CPF}
         />
 
         {/* Deve ser campo Data */}
         <Fields.Input
           {...register('birthDate')}
-          placeholder="Data de Nascimento"
+          label="Data de Nascimento"
+          placeholder="01/02/2003"
           keyboard="numeric"
+          mask={Masks.DATE_DDMMYYYY}
         />
 
         <Fields.Dropdown
           {...register('gender')}
-          placeholder="Gênero"
+          label="Gênero"
           options={GenderOptions}
         />
 
         <Fields.Input
           {...register('phone')}
-          placeholder="Telefone"
+          label="Número de Celular"
+          placeholder="(12) 34567-8910"
           keyboard="numeric"
+          mask={Masks.BRL_PHONE}
         />
       </View>
 

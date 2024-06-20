@@ -1,3 +1,9 @@
 export const isEmpty = (value: any): boolean => {
-  return !value;
+  return (
+    value === '' ||
+    value === false ||
+    value === null ||
+    value === undefined ||
+    Number.isNaN(value)
+  );
 };

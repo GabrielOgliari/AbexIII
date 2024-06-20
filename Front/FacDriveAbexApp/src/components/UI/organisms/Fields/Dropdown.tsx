@@ -7,6 +7,7 @@ export const DropdownField = ({
   errorMessage,
   hasSubmitted,
   size,
+  label,
   ...props
 }: Props) => {
   return (
@@ -14,6 +15,7 @@ export const DropdownField = ({
       errorMessage={errorMessage}
       hasSubmitted={hasSubmitted}
       size={size}
+      label={label}
     >
       <Dropdown {...props} />
     </WrapperField>

@@ -153,15 +153,20 @@ export const Vehicle = () => {
         }
       />
       <View style={{ gap: width * 0.08 }}>
-        <Fields.Input placeholder="Placa" {...register('plate')} />
-        <Fields.Input placeholder="Cor" {...register('color')} />
+        <Fields.Input label="Placa" {...register('plate')} />
+
+        <Fields.Input label="Cor" {...register('color')} />
+
         <Fields.Input
-          placeholder="Ano Fabricação"
+          label="Ano Fabricação"
           {...register('manufacturingYear')}
         />
-        <Fields.Input placeholder="Ano Modelo" {...register('modelYear')} />
-        <Fields.Input placeholder="Cidade" {...register('city')} />
-        <Fields.Input placeholder="Estado" {...register('state')} />
+
+        <Fields.Input label="Ano Modelo" {...register('modelYear')} />
+
+        <Fields.Input label="Cidade" {...register('city')} />
+
+        <Fields.Input label="Estado" {...register('state')} />
       </View>
       <View style={{ gap: width * 0.08, marginBottom: width * 0.08 }}>
         <ProgressCar currentStep={5} totalSteps={5} />
